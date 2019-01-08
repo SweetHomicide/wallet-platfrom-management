@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wallet.platform.dao.IMenuDao">
+
+	<resultMap type="com.wallet.platform.po.Menu" id="menu">
+		<id column="id" jdbcType="VARCHAR" property="id" javaType="java.lang.String" />
+		<result column="parent_id" jdbcType="VARCHAR" property="parentId" javaType="java.lang.String" />
+		<result column="menu_name" jdbcType="VARCHAR" property="menuName" javaType="java.lang.String" />
+		<result column="menu_href" jdbcType="VARCHAR" property="menuHref" javaType="java.lang.String" />
+		<result column="serno" jdbcType="INTEGER" property="serno" javaType="java.lang.Integer" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.wallet.platform.po.Menu">
+		insert into wallet_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				id,
+			</if>
+			<if test="null != parentId">
+				parent_id,
+			</if>
+			<if test="null != menuName">
+				menu_name,
+			</if>
+			<if test="null != menuHref">
+				menu_href,
+			</if>
+			<if test="null != serno">
+				serno,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				#{id, jdbcType=VARCHAR},
+			</if>
+			<if test="null != parentId">
+				#{parentId, jdbcType=VARCHAR},
+			</if>
+			<if test="null != menuName">
+				#{menuName, jdbcType=VARCHAR},
+			</if>
+			<if test="null != menuHref">
+				#{menuHref, jdbcType=VARCHAR},
+			</if>
+			<if test="null != serno">
+				#{serno, jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.wallet.platform.po.Menu">
+		update
+			wallet_menu
+		<set>
+			<if test="null != parentId">
+				parent_id = #{parentId, jdbcType=VARCHAR},
+			</if>
+			<if test="null != menuName">
+				menu_name = #{menuName, jdbcType=VARCHAR},
+			</if>
+			<if test="null != menuHref">
+				menu_href = #{menuHref, jdbcType=VARCHAR},
+			</if>
+			<if test="null != serno">
+				serno = #{serno, jdbcType=INTEGER},
+			</if>
+		</set>
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from
+			wallet_menu
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getById" parameterType="java.lang.String" resultMap="menu">
+		select
+			*
+		from
+			wallet_menu
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</select>
+
+	<select id="getByParam" parameterType="java.util.Map" resultMap="menu">
+		select
+			*
+		from
+			wallet_menu
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != parentId or null != parentIdRequired">
+				and parent_id = #{parentId, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menuName or null != menuNameRequired">
+				and menu_name = #{menuName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menuHref or null != menuHrefRequired">
+				and menu_href = #{menuHref, jdbcType=VARCHAR}
+			</if>
+			<if test="null != serno or null != sernoRequired">
+				and serno = #{serno, jdbcType=INTEGER}
+			</if>
+		</trim>
+		limit 1
+	</select>
+
+	<select id="queryByParam" parameterType="java.util.Map" resultMap="menu">
+		select
+			*
+		from
+			wallet_menu
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != parentId or null != parentIdRequired">
+				and parent_id = #{parentId, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menuName or null != menuNameRequired">
+				and menu_name = #{menuName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menuHref or null != menuHrefRequired">
+				and menu_href = #{menuHref, jdbcType=VARCHAR}
+			</if>
+			<if test="null != serno or null != sernoRequired">
+				and serno = #{serno, jdbcType=INTEGER}
+			</if>
+		</trim>
+		<if test="null != start and null != size">
+		limit
+			#{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(*)
+		from
+			wallet_menu
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != parentId or null != parentIdRequired">
+				and parent_id = #{parentId, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menuName or null != menuNameRequired">
+				and menu_name = #{menuName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menuHref or null != menuHrefRequired">
+				and menu_href = #{menuHref, jdbcType=VARCHAR}
+			</if>
+			<if test="null != serno or null != sernoRequired">
+				and serno = #{serno, jdbcType=INTEGER}
+			</if>
+		</trim>
+	</select>
+
+	<select id="queryByIds" parameterType="java.util.Map" resultMap="menu">
+		select
+			*
+		from
+			wallet_menu
+		where
+			id in
+		<foreach collection="menuIds" index="index" item="item" open="(" separator="," close=")">  
+	    	#{item}   
+	    </foreach>
+	    order by
+	    	serno asc
+	</select>
+</mapper>

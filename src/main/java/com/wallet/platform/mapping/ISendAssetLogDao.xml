@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wallet.platform.dao.ISendAssetLogDao">
+
+	<resultMap type="com.wallet.platform.po.SendAssetLog" id="sendAssetLog">
+		<id column="id" jdbcType="VARCHAR" property="id" javaType="java.lang.String" />
+		<result column="symbol" jdbcType="VARCHAR" property="symbol" javaType="java.lang.String" />
+		<result column="from_address" jdbcType="VARCHAR" property="fromAddress" javaType="java.lang.String" />
+		<result column="to_address" jdbcType="VARCHAR" property="toAddress" javaType="java.lang.String" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" javaType="java.math.BigDecimal" />
+		<result column="txid" jdbcType="VARCHAR" property="txid" javaType="java.lang.String" />
+		<result column="send_time" jdbcType="TIMESTAMP" property="sendTime" javaType="java.util.Date" />
+		<result column="send_note" jdbcType="VARCHAR" property="sendNote" javaType="java.lang.String" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.wallet.platform.po.SendAssetLog">
+		insert into wallet_log_send_asset
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				id,
+			</if>
+			<if test="null != symbol">
+				symbol,
+			</if>
+			<if test="null != fromAddress">
+				from_address,
+			</if>
+			<if test="null != toAddress">
+				to_address,
+			</if>
+			<if test="null != amount">
+				amount,
+			</if>
+			<if test="null != txid">
+				txid,
+			</if>
+			<if test="null != sendTime">
+				send_time,
+			</if>
+			<if test="null != sendNote">
+				send_note,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				#{id, jdbcType=VARCHAR},
+			</if>
+			<if test="null != symbol">
+				#{symbol, jdbcType=VARCHAR},
+			</if>
+			<if test="null != fromAddress">
+				#{fromAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != toAddress">
+				#{toAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != amount">
+				#{amount, jdbcType=DECIMAL},
+			</if>
+			<if test="null != txid">
+				#{txid, jdbcType=VARCHAR},
+			</if>
+			<if test="null != sendTime">
+				#{sendTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="null != sendNote">
+				#{sendNote, jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.wallet.platform.po.SendAssetLog">
+		update
+			wallet_log_send_asset
+		<set>
+			<if test="null != symbol">
+				symbol = #{symbol, jdbcType=VARCHAR},
+			</if>
+			<if test="null != fromAddress">
+				from_address = #{fromAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != toAddress">
+				to_address = #{toAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != amount">
+				amount = #{amount, jdbcType=DECIMAL},
+			</if>
+			<if test="null != txid">
+				txid = #{txid, jdbcType=VARCHAR},
+			</if>
+			<if test="null != sendTime">
+				send_time = #{sendTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="null != sendNote">
+				send_note = #{sendNote, jdbcType=VARCHAR},
+			</if>
+		</set>
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from
+			wallet_log_send_asset
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getById" parameterType="java.lang.String" resultMap="sendAssetLog">
+		select
+			*
+		from
+			wallet_log_send_asset
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</select>
+
+	<select id="getByParam" parameterType="java.util.Map" resultMap="sendAssetLog">
+		select
+			*
+		from
+			wallet_log_send_asset
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != fromAddress or null != fromAddressRequired">
+				and from_address = #{fromAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != toAddress or null != toAddressRequired">
+				and to_address = #{toAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != amount or null != amountRequired">
+				and amount = #{amount, jdbcType=DECIMAL}
+			</if>
+			<if test="null != txid or null != txidRequired">
+				and txid = #{txid, jdbcType=VARCHAR}
+			</if>
+			<if test="null != sendTime or null != sendTimeRequired">
+				and send_time = #{sendTime, jdbcType=TIMESTAMP}
+			</if>
+			<if test="null != sendNote or null != sendNoteRequired">
+				and send_note = #{sendNote, jdbcType=VARCHAR}
+			</if>
+		</trim>
+		limit 1
+	</select>
+
+	<select id="queryByParam" parameterType="java.util.Map" resultMap="sendAssetLog">
+		select
+			*
+		from
+			wallet_log_send_asset
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != fromAddress or null != fromAddressRequired">
+				and from_address = #{fromAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != toAddress or null != toAddressRequired">
+				and to_address = #{toAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != amount or null != amountRequired">
+				and amount = #{amount, jdbcType=DECIMAL}
+			</if>
+			<if test="null != txid or null != txidRequired">
+				and txid = #{txid, jdbcType=VARCHAR}
+			</if>
+			<if test="null != sendTime or null != sendTimeRequired">
+				and send_time = #{sendTime, jdbcType=TIMESTAMP}
+			</if>
+			<if test="null != sendNote or null != sendNoteRequired">
+				and send_note = #{sendNote, jdbcType=VARCHAR}
+			</if>
+		</trim>
+		<if test="null != start and null != size">
+		limit
+			#{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(*)
+		from
+			wallet_log_send_asset
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != fromAddress or null != fromAddressRequired">
+				and from_address = #{fromAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != toAddress or null != toAddressRequired">
+				and to_address = #{toAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != amount or null != amountRequired">
+				and amount = #{amount, jdbcType=DECIMAL}
+			</if>
+			<if test="null != txid or null != txidRequired">
+				and txid = #{txid, jdbcType=VARCHAR}
+			</if>
+			<if test="null != sendTime or null != sendTimeRequired">
+				and send_time = #{sendTime, jdbcType=TIMESTAMP}
+			</if>
+			<if test="null != sendNote or null != sendNoteRequired">
+				and send_note = #{sendNote, jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+</mapper>

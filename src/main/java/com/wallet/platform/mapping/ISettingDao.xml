@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wallet.platform.dao.ISettingDao">
+
+	<resultMap type="com.wallet.platform.po.Setting" id="setting">
+		<id column="setting_key" jdbcType="VARCHAR" property="settingKey" javaType="java.lang.String" />
+		<result column="setting_value" jdbcType="VARCHAR" property="settingValue" javaType="java.lang.String" />
+		<result column="setting_desc" jdbcType="VARCHAR" property="settingDesc" javaType="java.lang.String" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.wallet.platform.po.Setting">
+		insert into wallet_setting
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != settingKey">
+				setting_key,
+			</if>
+			<if test="null != settingValue">
+				setting_value,
+			</if>
+			<if test="null != settingDesc">
+				setting_desc,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="null != settingKey">
+				#{settingKey, jdbcType=VARCHAR},
+			</if>
+			<if test="null != settingValue">
+				#{settingValue, jdbcType=VARCHAR},
+			</if>
+			<if test="null != settingDesc">
+				#{settingDesc, jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.wallet.platform.po.Setting">
+		update
+			wallet_setting
+		<set>
+			<if test="null != settingValue">
+				setting_value = #{settingValue, jdbcType=VARCHAR},
+			</if>
+			<if test="null != settingDesc">
+				setting_desc = #{settingDesc, jdbcType=VARCHAR},
+			</if>
+		</set>
+		where
+			setting_key = #{settingKey, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from
+			wallet_setting
+		where
+			setting_key = #{settingKey, jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getById" parameterType="java.lang.String" resultMap="setting">
+		select
+			*
+		from
+			wallet_setting
+		where
+			setting_key = #{settingKey, jdbcType=VARCHAR}
+	</select>
+
+	<select id="getByParam" parameterType="java.util.Map" resultMap="setting">
+		select
+			*
+		from
+			wallet_setting
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != settingKey or null != settingKeyRequired">
+				and setting_key = #{settingKey, jdbcType=VARCHAR}
+			</if>
+			<if test="null != settingValue or null != settingValueRequired">
+				and setting_value = #{settingValue, jdbcType=VARCHAR}
+			</if>
+			<if test="null != settingDesc or null != settingDescRequired">
+				and setting_desc = #{settingDesc, jdbcType=VARCHAR}
+			</if>
+		</trim>
+		limit 1
+	</select>
+
+	<select id="queryByParam" parameterType="java.util.Map" resultMap="setting">
+		select
+			*
+		from
+			wallet_setting
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != settingKey or null != settingKeyRequired">
+				and setting_key = #{settingKey, jdbcType=VARCHAR}
+			</if>
+			<if test="null != settingValue or null != settingValueRequired">
+				and setting_value = #{settingValue, jdbcType=VARCHAR}
+			</if>
+			<if test="null != settingDesc or null != settingDescRequired">
+				and setting_desc = #{settingDesc, jdbcType=VARCHAR}
+			</if>
+		</trim>
+		<if test="null != start and null != size">
+		limit
+			#{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(*)
+		from
+			wallet_setting
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != settingKey or null != settingKeyRequired">
+				and setting_key = #{settingKey, jdbcType=VARCHAR}
+			</if>
+			<if test="null != settingValue or null != settingValueRequired">
+				and setting_value = #{settingValue, jdbcType=VARCHAR}
+			</if>
+			<if test="null != settingDesc or null != settingDescRequired">
+				and setting_desc = #{settingDesc, jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+</mapper>

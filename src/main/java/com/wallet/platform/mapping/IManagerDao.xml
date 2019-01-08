@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wallet.platform.dao.IManagerDao">
+
+	<resultMap type="com.wallet.platform.po.Manager" id="manager">
+		<id column="manager_name" jdbcType="VARCHAR" property="managerName" javaType="java.lang.String" />
+		<result column="manager_pwd" jdbcType="VARCHAR" property="managerPwd" javaType="java.lang.String" />
+		<result column="realname" jdbcType="VARCHAR" property="realname" javaType="java.lang.String" />
+		<result column="menus" jdbcType="VARCHAR" property="menus" javaType="java.lang.String" />
+		<result column="inuse" jdbcType="TINYINT" property="inuse" javaType="java.lang.Boolean" />
+		<result column="error_times" jdbcType="INTEGER" property="errorTimes" javaType="java.lang.Integer" />
+		<result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" javaType="java.util.Date" />
+		<result column="last_logout_time" jdbcType="TIMESTAMP" property="lastLogoutTime" javaType="java.util.Date" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.wallet.platform.po.Manager">
+		insert into wallet_manager
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != managerName">
+				manager_name,
+			</if>
+			<if test="null != managerPwd">
+				manager_pwd,
+			</if>
+			<if test="null != realname">
+				realname,
+			</if>
+			<if test="null != menus">
+				menus,
+			</if>
+			<if test="null != inuse">
+				inuse,
+			</if>
+			<if test="null != errorTimes">
+				error_times,
+			</if>
+			<if test="null != lastLoginTime">
+				last_login_time,
+			</if>
+			<if test="null != lastLogoutTime">
+				last_logout_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="null != managerName">
+				#{managerName, jdbcType=VARCHAR},
+			</if>
+			<if test="null != managerPwd">
+				#{managerPwd, jdbcType=VARCHAR},
+			</if>
+			<if test="null != realname">
+				#{realname, jdbcType=VARCHAR},
+			</if>
+			<if test="null != menus">
+				#{menus, jdbcType=VARCHAR},
+			</if>
+			<if test="null != inuse">
+				#{inuse, jdbcType=TINYINT},
+			</if>
+			<if test="null != errorTimes">
+				#{errorTimes, jdbcType=INTEGER},
+			</if>
+			<if test="null != lastLoginTime">
+				#{lastLoginTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="null != lastLogoutTime">
+				#{lastLogoutTime, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.wallet.platform.po.Manager">
+		update
+			wallet_manager
+		<set>
+			<if test="null != managerPwd">
+				manager_pwd = #{managerPwd, jdbcType=VARCHAR},
+			</if>
+			<if test="null != realname">
+				realname = #{realname, jdbcType=VARCHAR},
+			</if>
+			<if test="null != menus">
+				menus = #{menus, jdbcType=VARCHAR},
+			</if>
+			<if test="null != inuse">
+				inuse = #{inuse, jdbcType=TINYINT},
+			</if>
+			<if test="null != errorTimes">
+				error_times = #{errorTimes, jdbcType=INTEGER},
+			</if>
+			<if test="null != lastLoginTime">
+				last_login_time = #{lastLoginTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="null != lastLogoutTime">
+				last_logout_time = #{lastLogoutTime, jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where
+			manager_name = #{managerName, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from
+			wallet_manager
+		where
+			manager_name = #{managerName, jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getById" parameterType="java.lang.String" resultMap="manager">
+		select
+			*
+		from
+			wallet_manager
+		where
+			manager_name = #{managerName, jdbcType=VARCHAR}
+	</select>
+
+	<select id="getByParam" parameterType="java.util.Map" resultMap="manager">
+		select
+			*
+		from
+			wallet_manager
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != managerName or null != managerNameRequired">
+				and manager_name = #{managerName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != managerPwd or null != managerPwdRequired">
+				and manager_pwd = #{managerPwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != realname or null != realnameRequired">
+				and realname = #{realname, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menus or null != menusRequired">
+				and menus = #{menus, jdbcType=VARCHAR}
+			</if>
+			<if test="null != inuse or null != inuseRequired">
+				and inuse = #{inuse, jdbcType=TINYINT}
+			</if>
+			<if test="null != errorTimes or null != errorTimesRequired">
+				and error_times = #{errorTimes, jdbcType=INTEGER}
+			</if>
+			<if test="null != lastLoginTime or null != lastLoginTimeRequired">
+				and last_login_time = #{lastLoginTime, jdbcType=TIMESTAMP}
+			</if>
+			<if test="null != lastLogoutTime or null != lastLogoutTimeRequired">
+				and last_logout_time = #{lastLogoutTime, jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+		limit 1
+	</select>
+
+	<select id="queryByParam" parameterType="java.util.Map" resultMap="manager">
+		select
+			*
+		from
+			wallet_manager
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != managerName or null != managerNameRequired">
+				and manager_name = #{managerName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != managerPwd or null != managerPwdRequired">
+				and manager_pwd = #{managerPwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != realname or null != realnameRequired">
+				and realname = #{realname, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menus or null != menusRequired">
+				and menus = #{menus, jdbcType=VARCHAR}
+			</if>
+			<if test="null != inuse or null != inuseRequired">
+				and inuse = #{inuse, jdbcType=TINYINT}
+			</if>
+			<if test="null != errorTimes or null != errorTimesRequired">
+				and error_times = #{errorTimes, jdbcType=INTEGER}
+			</if>
+			<if test="null != lastLoginTime or null != lastLoginTimeRequired">
+				and last_login_time = #{lastLoginTime, jdbcType=TIMESTAMP}
+			</if>
+			<if test="null != lastLogoutTime or null != lastLogoutTimeRequired">
+				and last_logout_time = #{lastLogoutTime, jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+		<if test="null != start and null != size">
+		limit
+			#{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(*)
+		from
+			wallet_manager
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != managerName or null != managerNameRequired">
+				and manager_name = #{managerName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != managerPwd or null != managerPwdRequired">
+				and manager_pwd = #{managerPwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != realname or null != realnameRequired">
+				and realname = #{realname, jdbcType=VARCHAR}
+			</if>
+			<if test="null != menus or null != menusRequired">
+				and menus = #{menus, jdbcType=VARCHAR}
+			</if>
+			<if test="null != inuse or null != inuseRequired">
+				and inuse = #{inuse, jdbcType=TINYINT}
+			</if>
+			<if test="null != errorTimes or null != errorTimesRequired">
+				and error_times = #{errorTimes, jdbcType=INTEGER}
+			</if>
+			<if test="null != lastLoginTime or null != lastLoginTimeRequired">
+				and last_login_time = #{lastLoginTime, jdbcType=TIMESTAMP}
+			</if>
+			<if test="null != lastLogoutTime or null != lastLogoutTimeRequired">
+				and last_logout_time = #{lastLogoutTime, jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+	</select>
+
+</mapper>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wallet.platform.dao.IAssetDao">
+
+	<resultMap type="com.wallet.platform.po.Asset" id="asset">
+		<id column="id" jdbcType="VARCHAR" property="id" javaType="java.lang.String" />
+		<result column="symbol" jdbcType="VARCHAR" property="symbol" javaType="java.lang.String" />
+		<result column="symbol_name" jdbcType="VARCHAR" property="symbolName" javaType="java.lang.String" />
+		<result column="is_use" jdbcType="TINYINT" property="isUse" javaType="java.lang.Boolean" />
+		<result column="address" jdbcType="VARCHAR" property="address" javaType="java.lang.String" />
+		<result column="abc_address" jdbcType="VARCHAR" property="abcAddress" javaType="java.lang.String" />
+		<result column="block_height" jdbcType="BIGINT" property="blockHeight" javaType="java.lang.Long" />
+		<result column="tx_fee" jdbcType="DECIMAL" property="txFee" javaType="java.math.BigDecimal" />
+		<result column="asset_type" jdbcType="INTEGER" property="assetType" javaType="java.lang.Integer" />
+		<result column="cfos_charge_server" jdbcType="VARCHAR" property="cfosChargeServer" javaType="java.lang.String" />
+		<result column="cfos_charge_user" jdbcType="VARCHAR" property="cfosChargeUser" javaType="java.lang.String" />
+		<result column="cfos_charge_pwd" jdbcType="VARCHAR" property="cfosChargePwd" javaType="java.lang.String" />
+		<result column="cfos_withdraw_server" jdbcType="VARCHAR" property="cfosWithdrawServer" javaType="java.lang.String" />
+		<result column="cfos_withdraw_user" jdbcType="VARCHAR" property="cfosWithdrawUser" javaType="java.lang.String" />
+		<result column="cfos_withdraw_pwd" jdbcType="VARCHAR" property="cfosWithdrawPwd" javaType="java.lang.String" />
+		<result column="is_change" jdbcType="TINYINT" property="isChange" javaType="java.lang.Boolean" />
+		<result column="change_address" jdbcType="VARCHAR" property="changeAddress" javaType="java.lang.String" />
+		<result column="change_fee_address" jdbcType="VARCHAR" property="changeFeeAddress" javaType="java.lang.String" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.wallet.platform.po.Asset">
+		insert into wallet_asset
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				id,
+			</if>
+			<if test="null != symbol">
+				symbol,
+			</if>
+			<if test="null != symbolName">
+				symbol_name,
+			</if>
+			<if test="null != isUse">
+				is_use,
+			</if>
+			<if test="null != address">
+				address,
+			</if>
+			<if test="null != abcAddress">
+				abc_address,
+			</if>
+			<if test="null != blockHeight">
+				block_height,
+			</if>
+			<if test="null != txFee">
+				tx_fee,
+			</if>
+			<if test="null != assetType">
+				asset_type,
+			</if>
+			<if test="null != cfosChargeServer">
+				cfos_charge_server,
+			</if>
+			<if test="null != cfosChargeUser">
+				cfos_charge_user,
+			</if>
+			<if test="null != cfosChargePwd">
+				cfos_charge_pwd,
+			</if>
+			<if test="null != cfosWithdrawServer">
+				cfos_withdraw_server,
+			</if>
+			<if test="null != cfosWithdrawUser">
+				cfos_withdraw_user,
+			</if>
+			<if test="null != cfosWithdrawPwd">
+				cfos_withdraw_pwd,
+			</if>
+			<if test="null != isChange">
+				is_change,
+			</if>
+			<if test="null != changeAddress">
+				change_address,
+			</if>
+			<if test="null != changeFeeAddress">
+				change_fee_address,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				#{id, jdbcType=VARCHAR},
+			</if>
+			<if test="null != symbol">
+				#{symbol, jdbcType=VARCHAR},
+			</if>
+			<if test="null != symbolName">
+				#{symbolName, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isUse">
+				#{isUse, jdbcType=TINYINT},
+			</if>
+			<if test="null != address">
+				#{address, jdbcType=VARCHAR},
+			</if>
+			<if test="null != abcAddress">
+				#{abcAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != blockHeight">
+				#{blockHeight, jdbcType=BIGINT},
+			</if>
+			<if test="null != txFee">
+				#{txFee, jdbcType=DECIMAL},
+			</if>
+			<if test="null != assetType">
+				#{assetType, jdbcType=INTEGER},
+			</if>
+			<if test="null != cfosChargeServer">
+				#{cfosChargeServer, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosChargeUser">
+				#{cfosChargeUser, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosChargePwd">
+				#{cfosChargePwd, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosWithdrawServer">
+				#{cfosWithdrawServer, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosWithdrawUser">
+				#{cfosWithdrawUser, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosWithdrawPwd">
+				#{cfosWithdrawPwd, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isChange">
+				#{isChange, jdbcType=TINYINT},
+			</if>
+			<if test="null != changeAddress">
+				#{changeAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != changeFeeAddress">
+				#{changeFeeAddress, jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.wallet.platform.po.Asset">
+		update
+			wallet_asset
+		<set>
+			<if test="null != symbol">
+				symbol = #{symbol, jdbcType=VARCHAR},
+			</if>
+			<if test="null != symbolName">
+				symbol_name = #{symbolName, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isUse">
+				is_use = #{isUse, jdbcType=TINYINT},
+			</if>
+			<if test="null != address">
+				address = #{address, jdbcType=VARCHAR},
+			</if>
+			<if test="null != abcAddress">
+				abc_address = #{abcAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != blockHeight">
+				block_height = #{blockHeight, jdbcType=BIGINT},
+			</if>
+			<if test="null != txFee">
+				tx_fee = #{txFee, jdbcType=DECIMAL},
+			</if>
+			<if test="null != assetType">
+				asset_type = #{assetType, jdbcType=INTEGER},
+			</if>
+			<if test="null != cfosChargeServer">
+				cfos_charge_server = #{cfosChargeServer, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosChargeUser">
+				cfos_charge_user = #{cfosChargeUser, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosChargePwd">
+				cfos_charge_pwd = #{cfosChargePwd, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosWithdrawServer">
+				cfos_withdraw_server = #{cfosWithdrawServer, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosWithdrawUser">
+				cfos_withdraw_user = #{cfosWithdrawUser, jdbcType=VARCHAR},
+			</if>
+			<if test="null != cfosWithdrawPwd">
+				cfos_withdraw_pwd = #{cfosWithdrawPwd, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isChange">
+				is_change = #{isChange, jdbcType=TINYINT},
+			</if>
+			<if test="null != changeAddress">
+				change_address = #{changeAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="null != changeFeeAddress">
+				change_fee_address = #{changeFeeAddress, jdbcType=VARCHAR},
+			</if>
+		</set>
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from
+			wallet_asset
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getById" parameterType="java.lang.String" resultMap="asset">
+		select
+			*
+		from
+			wallet_asset
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</select>
+
+	<select id="getByParam" parameterType="java.util.Map" resultMap="asset">
+		select
+			*
+		from
+			wallet_asset
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbolName or null != symbolNameRequired">
+				and symbol_name = #{symbolName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isUse or null != isUseRequired">
+				and is_use = #{isUse, jdbcType=TINYINT}
+			</if>
+			<if test="null != address or null != addressRequired">
+				and address = #{address, jdbcType=VARCHAR}
+			</if>
+			<if test="null != abcAddress or null != abcAddressRequired">
+				and abc_address = #{abcAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != blockHeight or null != blockHeightRequired">
+				and block_height = #{blockHeight, jdbcType=BIGINT}
+			</if>
+			<if test="null != txFee or null != txFeeRequired">
+				and tx_fee = #{txFee, jdbcType=DECIMAL}
+			</if>
+			<if test="null != assetType or null != assetTypeRequired">
+				and asset_type = #{assetType, jdbcType=INTEGER}
+			</if>
+			<if test="null != cfosChargeServer or null != cfosChargeServerRequired">
+				and cfos_charge_server = #{cfosChargeServer, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosChargeUser or null != cfosChargeUserRequired">
+				and cfos_charge_user = #{cfosChargeUser, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosChargePwd or null != cfosChargePwdRequired">
+				and cfos_charge_pwd = #{cfosChargePwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawServer or null != cfosWithdrawServerRequired">
+				and cfos_withdraw_server = #{cfosWithdrawServer, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawUser or null != cfosWithdrawUserRequired">
+				and cfos_withdraw_user = #{cfosWithdrawUser, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawPwd or null != cfosWithdrawPwdRequired">
+				and cfos_withdraw_pwd = #{cfosWithdrawPwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isChange or null != isChangeRequired">
+				and is_change = #{isChange, jdbcType=TINYINT}
+			</if>
+			<if test="null != changeAddress or null != changeAddressRequired">
+				and change_address = #{changeAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != changeFeeAddress or null != changeFeeAddressRequired">
+				and change_fee_address = #{changeFeeAddress, jdbcType=VARCHAR}
+			</if>
+		</trim>
+		limit 1
+	</select>
+
+	<select id="queryByParam" parameterType="java.util.Map" resultMap="asset">
+		select
+			*
+		from
+			wallet_asset
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbolName or null != symbolNameRequired">
+				and symbol_name = #{symbolName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isUse or null != isUseRequired">
+				and is_use = #{isUse, jdbcType=TINYINT}
+			</if>
+			<if test="null != address or null != addressRequired">
+				and address = #{address, jdbcType=VARCHAR}
+			</if>
+			<if test="null != abcAddress or null != abcAddressRequired">
+				and abc_address = #{abcAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != blockHeight or null != blockHeightRequired">
+				and block_height = #{blockHeight, jdbcType=BIGINT}
+			</if>
+			<if test="null != txFee or null != txFeeRequired">
+				and tx_fee = #{txFee, jdbcType=DECIMAL}
+			</if>
+			<if test="null != assetType or null != assetTypeRequired">
+				and asset_type = #{assetType, jdbcType=INTEGER}
+			</if>
+			<if test="null != cfosChargeServer or null != cfosChargeServerRequired">
+				and cfos_charge_server = #{cfosChargeServer, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosChargeUser or null != cfosChargeUserRequired">
+				and cfos_charge_user = #{cfosChargeUser, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosChargePwd or null != cfosChargePwdRequired">
+				and cfos_charge_pwd = #{cfosChargePwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawServer or null != cfosWithdrawServerRequired">
+				and cfos_withdraw_server = #{cfosWithdrawServer, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawUser or null != cfosWithdrawUserRequired">
+				and cfos_withdraw_user = #{cfosWithdrawUser, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawPwd or null != cfosWithdrawPwdRequired">
+				and cfos_withdraw_pwd = #{cfosWithdrawPwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isChange or null != isChangeRequired">
+				and is_change = #{isChange, jdbcType=TINYINT}
+			</if>
+			<if test="null != changeAddress or null != changeAddressRequired">
+				and change_address = #{changeAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != changeFeeAddress or null != changeFeeAddressRequired">
+				and change_fee_address = #{changeFeeAddress, jdbcType=VARCHAR}
+			</if>
+		</trim>
+		<if test="null != start and null != size">
+		limit
+			#{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(*)
+		from
+			wallet_asset
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbolName or null != symbolNameRequired">
+				and symbol_name = #{symbolName, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isUse or null != isUseRequired">
+				and is_use = #{isUse, jdbcType=TINYINT}
+			</if>
+			<if test="null != address or null != addressRequired">
+				and address = #{address, jdbcType=VARCHAR}
+			</if>
+			<if test="null != abcAddress or null != abcAddressRequired">
+				and abc_address = #{abcAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != blockHeight or null != blockHeightRequired">
+				and block_height = #{blockHeight, jdbcType=BIGINT}
+			</if>
+			<if test="null != txFee or null != txFeeRequired">
+				and tx_fee = #{txFee, jdbcType=DECIMAL}
+			</if>
+			<if test="null != assetType or null != assetTypeRequired">
+				and asset_type = #{assetType, jdbcType=INTEGER}
+			</if>
+			<if test="null != cfosChargeServer or null != cfosChargeServerRequired">
+				and cfos_charge_server = #{cfosChargeServer, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosChargeUser or null != cfosChargeUserRequired">
+				and cfos_charge_user = #{cfosChargeUser, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosChargePwd or null != cfosChargePwdRequired">
+				and cfos_charge_pwd = #{cfosChargePwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawServer or null != cfosWithdrawServerRequired">
+				and cfos_withdraw_server = #{cfosWithdrawServer, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawUser or null != cfosWithdrawUserRequired">
+				and cfos_withdraw_user = #{cfosWithdrawUser, jdbcType=VARCHAR}
+			</if>
+			<if test="null != cfosWithdrawPwd or null != cfosWithdrawPwdRequired">
+				and cfos_withdraw_pwd = #{cfosWithdrawPwd, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isChange or null != isChangeRequired">
+				and is_change = #{isChange, jdbcType=TINYINT}
+			</if>
+			<if test="null != changeAddress or null != changeAddressRequired">
+				and change_address = #{changeAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="null != changeFeeAddress or null != changeFeeAddressRequired">
+				and change_fee_address = #{changeFeeAddress, jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+	
+	<update id="updateByCfos" parameterType="com.wallet.platform.po.Asset">
+		update
+			wallet_asset
+		set
+			block_height = #{blockHeight, jdbcType=BIGINT}
+		where
+			<choose>
+				<when test="null != cfosChargeServer and '' != cfosChargeServer">
+					cfos_charge_server = #{cfosChargeServer, jdbcType=VARCHAR}
+					and cfos_charge_user = #{cfosChargeUser, jdbcType=VARCHAR}
+				</when>
+				<otherwise>
+					cfos_charge_server is null 
+					or cfos_charge_server = ''
+				</otherwise>
+			</choose>
+	</update>
+</mapper>

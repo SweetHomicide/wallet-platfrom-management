@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wallet.platform.dao.ITransactionDao">
+
+	<resultMap type="com.wallet.platform.po.Transaction" id="transaction">
+		<id column="id" jdbcType="VARCHAR" property="id" javaType="java.lang.String" />
+		<result column="txid" jdbcType="VARCHAR" property="txid" javaType="java.lang.String" />
+		<result column="category" jdbcType="VARCHAR" property="category" javaType="java.lang.String" />
+		<result column="symbol" jdbcType="VARCHAR" property="symbol" javaType="java.lang.String" />
+		<result column="account" jdbcType="VARCHAR" property="account" javaType="java.lang.String" />
+		<result column="address" jdbcType="VARCHAR" property="address" javaType="java.lang.String" />
+		<result column="block_height" jdbcType="BIGINT" property="blockHeight" javaType="java.lang.Long" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" javaType="java.math.BigDecimal" />
+		<result column="confirms" jdbcType="INTEGER" property="confirms" javaType="java.lang.Integer" />
+		<result column="time_received" jdbcType="BIGINT" property="timeReceived" javaType="java.lang.Long" />
+		<result column="is_upload" jdbcType="TINYINT" property="isUpload" javaType="java.lang.Boolean" />
+		<result column="upload_message" jdbcType="VARCHAR" property="uploadMessage" javaType="java.lang.String" />
+		<result column="is_confirm" jdbcType="TINYINT" property="isConfirm" javaType="java.lang.Boolean" />
+		<result column="confirm_message" jdbcType="VARCHAR" property="confirmMessage" javaType="java.lang.String" />
+		<result column="is_processed" jdbcType="TINYINT" property="isProcessed" javaType="java.lang.Boolean" />
+		<result column="process_time" jdbcType="BIGINT" property="processTime" javaType="java.lang.Long" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.wallet.platform.po.Transaction">
+		insert into wallet_transaction
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				id,
+			</if>
+			<if test="null != txid">
+				txid,
+			</if>
+			<if test="null != category">
+				category,
+			</if>
+			<if test="null != symbol">
+				symbol,
+			</if>
+			<if test="null != account">
+				account,
+			</if>
+			<if test="null != address">
+				address,
+			</if>
+			<if test="null != blockHeight">
+				block_height,
+			</if>
+			<if test="null != amount">
+				amount,
+			</if>
+			<if test="null != confirms">
+				confirms,
+			</if>
+			<if test="null != timeReceived">
+				time_received,
+			</if>
+			<if test="null != isUpload">
+				is_upload,
+			</if>
+			<if test="null != uploadMessage">
+				upload_message,
+			</if>
+			<if test="null != isConfirm">
+				is_confirm,
+			</if>
+			<if test="null != confirmMessage">
+				confirm_message,
+			</if>
+			<if test="null != isProcessed">
+				is_processed,
+			</if>
+			<if test="null != processTime">
+				process_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="null != id">
+				#{id, jdbcType=VARCHAR},
+			</if>
+			<if test="null != txid">
+				#{txid, jdbcType=VARCHAR},
+			</if>
+			<if test="null != category">
+				#{category, jdbcType=VARCHAR},
+			</if>
+			<if test="null != symbol">
+				#{symbol, jdbcType=VARCHAR},
+			</if>
+			<if test="null != account">
+				#{account, jdbcType=VARCHAR},
+			</if>
+			<if test="null != address">
+				#{address, jdbcType=VARCHAR},
+			</if>
+			<if test="null != blockHeight">
+				#{blockHeight, jdbcType=BIGINT},
+			</if>
+			<if test="null != amount">
+				#{amount, jdbcType=DECIMAL},
+			</if>
+			<if test="null != confirms">
+				#{confirms, jdbcType=INTEGER},
+			</if>
+			<if test="null != timeReceived">
+				#{timeReceived, jdbcType=BIGINT},
+			</if>
+			<if test="null != isUpload">
+				#{isUpload, jdbcType=TINYINT},
+			</if>
+			<if test="null != uploadMessage">
+				#{uploadMessage, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isConfirm">
+				#{isConfirm, jdbcType=TINYINT},
+			</if>
+			<if test="null != confirmMessage">
+				#{confirmMessage, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isProcessed">
+				#{isProcessed, jdbcType=TINYINT},
+			</if>
+			<if test="null != processTime">
+				#{processTime, jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.wallet.platform.po.Transaction">
+		update
+			wallet_transaction
+		<set>
+			<if test="null != txid">
+				txid = #{txid, jdbcType=VARCHAR},
+			</if>
+			<if test="null != category">
+				category = #{category, jdbcType=VARCHAR},
+			</if>
+			<if test="null != symbol">
+				symbol = #{symbol, jdbcType=VARCHAR},
+			</if>
+			<if test="null != account">
+				account = #{account, jdbcType=VARCHAR},
+			</if>
+			<if test="null != address">
+				address = #{address, jdbcType=VARCHAR},
+			</if>
+			<if test="null != blockHeight">
+				block_height = #{blockHeight, jdbcType=BIGINT},
+			</if>
+			<if test="null != amount">
+				amount = #{amount, jdbcType=DECIMAL},
+			</if>
+			<if test="null != confirms">
+				confirms = #{confirms, jdbcType=INTEGER},
+			</if>
+			<if test="null != timeReceived">
+				time_received = #{timeReceived, jdbcType=BIGINT},
+			</if>
+			<if test="null != isUpload">
+				is_upload = #{isUpload, jdbcType=TINYINT},
+			</if>
+			<if test="null != uploadMessage">
+				upload_message = #{uploadMessage, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isConfirm">
+				is_confirm = #{isConfirm, jdbcType=TINYINT},
+			</if>
+			<if test="null != confirmMessage">
+				confirm_message = #{confirmMessage, jdbcType=VARCHAR},
+			</if>
+			<if test="null != isProcessed">
+				is_processed = #{isProcessed, jdbcType=TINYINT},
+			</if>
+			<if test="null != processTime">
+				process_time = #{processTime, jdbcType=BIGINT},
+			</if>
+		</set>
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from
+			wallet_transaction
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getById" parameterType="java.lang.String" resultMap="transaction">
+		select
+			*
+		from
+			wallet_transaction
+		where
+			id = #{id, jdbcType=VARCHAR}
+	</select>
+
+	<select id="getByParam" parameterType="java.util.Map" resultMap="transaction">
+		select
+			*
+		from
+			wallet_transaction
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != txid or null != txidRequired">
+				and txid = #{txid, jdbcType=VARCHAR}
+			</if>
+			<if test="null != category or null != categoryRequired">
+				and category = #{category, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != account or null != accountRequired">
+				and account = #{account, jdbcType=VARCHAR}
+			</if>
+			<if test="null != address or null != addressRequired">
+				and address = #{address, jdbcType=VARCHAR}
+			</if>
+			<if test="null != blockHeight or null != blockHeightRequired">
+				and block_height = #{blockHeight, jdbcType=BIGINT}
+			</if>
+			<if test="null != amount or null != amountRequired">
+				and amount = #{amount, jdbcType=DECIMAL}
+			</if>
+			<if test="null != confirms or null != confirmsRequired">
+				and confirms = #{confirms, jdbcType=INTEGER}
+			</if>
+			<if test="null != timeReceived or null != timeReceivedRequired">
+				and time_received = #{timeReceived, jdbcType=BIGINT}
+			</if>
+			<if test="null != isUpload or null != isUploadRequired">
+				and is_upload = #{isUpload, jdbcType=TINYINT}
+			</if>
+			<if test="null != uploadMessage or null != uploadMessageRequired">
+				and upload_message = #{uploadMessage, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isConfirm or null != isConfirmRequired">
+				and is_confirm = #{isConfirm, jdbcType=TINYINT}
+			</if>
+			<if test="null != confirmMessage or null != confirmMessageRequired">
+				and confirm_message = #{confirmMessage, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isProcessed or null != isProcessedRequired">
+				and is_processed = #{isProcessed, jdbcType=TINYINT}
+			</if>
+			<if test="null != processTime or null != processTimeRequired">
+				and process_time = #{processTime, jdbcType=BIGINT}
+			</if>
+		</trim>
+		limit 1
+	</select>
+
+	<select id="queryByParam" parameterType="java.util.Map" resultMap="transaction">
+		select
+			*
+		from
+			wallet_transaction
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != txid or null != txidRequired">
+				and txid = #{txid, jdbcType=VARCHAR}
+			</if>
+			<if test="null != category or null != categoryRequired">
+				and category = #{category, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != account or null != accountRequired">
+				and account = #{account, jdbcType=VARCHAR}
+			</if>
+			<if test="null != address or null != addressRequired">
+				and address = #{address, jdbcType=VARCHAR}
+			</if>
+			<if test="null != blockHeight or null != blockHeightRequired">
+				and block_height = #{blockHeight, jdbcType=BIGINT}
+			</if>
+			<if test="null != amount or null != amountRequired">
+				and amount = #{amount, jdbcType=DECIMAL}
+			</if>
+			<if test="null != confirms or null != confirmsRequired">
+				and confirms = #{confirms, jdbcType=INTEGER}
+			</if>
+			<if test="null != timeReceived or null != timeReceivedRequired">
+				and time_received = #{timeReceived, jdbcType=BIGINT}
+			</if>
+			<if test="null != isUpload or null != isUploadRequired">
+				and is_upload = #{isUpload, jdbcType=TINYINT}
+			</if>
+			<if test="null != uploadMessage or null != uploadMessageRequired">
+				and upload_message = #{uploadMessage, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isConfirm or null != isConfirmRequired">
+				and is_confirm = #{isConfirm, jdbcType=TINYINT}
+			</if>
+			<if test="null != confirmMessage or null != confirmMessageRequired">
+				and confirm_message = #{confirmMessage, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isProcessed or null != isProcessedRequired">
+				and is_processed = #{isProcessed, jdbcType=TINYINT}
+			</if>
+			<if test="null != processTime or null != processTimeRequired">
+				and process_time = #{processTime, jdbcType=BIGINT}
+			</if>
+		</trim>
+		order by
+			time_received desc
+		<if test="null != start and null != size">
+		limit
+			#{start, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(*)
+		from
+			wallet_transaction
+		<trim prefix=" where " prefixOverrides="and" suffixOverrides="and">
+			<if test="null != id or null != idRequired">
+				and id = #{id, jdbcType=VARCHAR}
+			</if>
+			<if test="null != txid or null != txidRequired">
+				and txid = #{txid, jdbcType=VARCHAR}
+			</if>
+			<if test="null != category or null != categoryRequired">
+				and category = #{category, jdbcType=VARCHAR}
+			</if>
+			<if test="null != symbol or null != symbolRequired">
+				and symbol = #{symbol, jdbcType=VARCHAR}
+			</if>
+			<if test="null != account or null != accountRequired">
+				and account = #{account, jdbcType=VARCHAR}
+			</if>
+			<if test="null != address or null != addressRequired">
+				and address = #{address, jdbcType=VARCHAR}
+			</if>
+			<if test="null != blockHeight or null != blockHeightRequired">
+				and block_height = #{blockHeight, jdbcType=BIGINT}
+			</if>
+			<if test="null != amount or null != amountRequired">
+				and amount = #{amount, jdbcType=DECIMAL}
+			</if>
+			<if test="null != confirms or null != confirmsRequired">
+				and confirms = #{confirms, jdbcType=INTEGER}
+			</if>
+			<if test="null != timeReceived or null != timeReceivedRequired">
+				and time_received = #{timeReceived, jdbcType=BIGINT}
+			</if>
+			<if test="null != isUpload or null != isUploadRequired">
+				and is_upload = #{isUpload, jdbcType=TINYINT}
+			</if>
+			<if test="null != uploadMessage or null != uploadMessageRequired">
+				and upload_message = #{uploadMessage, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isConfirm or null != isConfirmRequired">
+				and is_confirm = #{isConfirm, jdbcType=TINYINT}
+			</if>
+			<if test="null != confirmMessage or null != confirmMessageRequired">
+				and confirm_message = #{confirmMessage, jdbcType=VARCHAR}
+			</if>
+			<if test="null != isProcessed or null != isProcessedRequired">
+				and is_processed = #{isProcessed, jdbcType=TINYINT}
+			</if>
+			<if test="null != processTime or null != processTimeRequired">
+				and process_time = #{processTime, jdbcType=BIGINT}
+			</if>
+		</trim>
+	</select>
+
+	<select id="getFristUpload" resultMap="transaction">
+		select
+			*
+		from
+			wallet_transaction
+		where
+			category = 'receive'
+			and is_upload = true
+			and is_processed = false
+		order by
+			process_time asc
+		limit
+			1
+	</select>
+	
+	<update id="updateTxUploadProcessed" parameterType="java.util.Map">
+		update
+			wallet_transaction
+		set
+			is_upload = false,
+			upload_message = '和手续费数据相似，排除处理',
+			is_confirm = false,
+			is_processed = true,
+			process_time = #{processTime, jdbcType=BIGINT}
+		where
+			txid = #{txid, jdbcType=VARCHAR}
+			and address = #{address, jdbcType=VARCHAR}
+	</update>
+	
+	<select id="getFristConfirm" resultMap="transaction">
+		select
+			*
+		from
+			wallet_transaction
+		where
+			category = 'receive'
+			and is_upload = false
+			and is_confirm = true
+			and is_processed = false
+		order by
+			process_time asc
+		limit
+			1
+	</select>
+</mapper>
